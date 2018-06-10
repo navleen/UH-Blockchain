@@ -1,0 +1,57 @@
+/**
+  * A business network for shipping perishable goods
+  * The cargo is temperature controlled and contracts
+  * can be negociated based on the temperature
+  * readings received for the cargo
+  */
+
+namespace org.acme.propertyhandleregistry
+
+participant Proprietor identified by properietorId {
+  o String properietorId
+  o String firstname
+  o String lastname
+  o String emailid
+  o String gender
+  o String dob
+  o String address
+  o String govtId
+  o Double contactno
+}
+
+participant LandRegistrar identified by registrarId{
+o String registrarId
+}
+asset Property identified by propertyId {
+  o String   propertyId
+  o String   information
+  o Double   length
+  o Double   width
+  o Double   longitude
+  o Double   latitude
+  --> Proprietor   owner 
+  
+}
+
+
+transaction AddLandDetails {
+  o String   propertyId
+  o String   information
+  o Double   length
+  o Double   width
+  o Double   longitude
+  o Double   latitude
+  --> Proprietor   owner
+}
+
+transaction TransferOwnership {
+  --> Proprietor newowner
+  --> Proprietor oldowner optional
+  --> Property propertydetails
+}
+
+/**
+ * JUST FOR INITIALIZING A DEMO
+ */
+transaction SetupDemo {
+}
